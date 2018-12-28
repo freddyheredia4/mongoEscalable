@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+
+  mongoe1:
+    privileged: true
+    image: mongoe
+    hostname: mongoe1
+    ports:
+      - 27017:27017
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  mongoe2:
+    privileged: true
+    image: mongoe
+    hostname: mongoe2
+    ports:
+      - 27018:27017
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  mongoe3:
+    privileged: true
+    image: mongoe
+    hostname: mongoe3
+    ports:
+      - 27019:27017
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
