@@ -2,29 +2,92 @@ version: '2'
 
 services:
 
-  mongoe1:
+  mongo1:
     privileged: true
-    image: mongoe
-    hostname: mongoe1
-    ports:
-      - 27017:27017
+    build:
+      context: mongoshard1/
+    hostname: mongo1
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
-  mongoe2:
+  mongo2:
     privileged: true
-    image: mongoe
-    hostname: mongoe2
-    ports:
-      - 27018:27017
+    build:
+      context: mongoshard1/
+    hostname: mongo2
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
-  mongoe3:
+  mongo3:
     privileged: true
-    image: mongoe
-    hostname: mongoe3
-    ports:
-      - 27019:27017
+    build:
+      context: mongoshard1/
+    hostname: mongo3
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  mongo4:
+    privileged: true
+    build:
+      context: mongoshard2/
+    hostname: mongo4
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  mongo5:
+    privileged: true
+    build:
+      context: mongoshard2/
+    hostname: mongo5
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  mongo6:
+    privileged: true
+    build:
+      context: mongoshard2/
+    hostname: mongo6
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  config1:
+    privileged: true
+    build:
+      context: mongoconfig/
+    hostname: config1
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  config2:
+    privileged: true
+    build:
+      context: mongoconfig/
+    hostname: config2
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  config3:
+    privileged: true
+    build:
+      context: mongoconfig/
+    hostname: config3
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  mongoss:
+    privileged: true
+    build:
+      context: mongoss/
+    hostname: mongoss
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+      - mongo4
+      - mongo5
+      - mongo6
+      - config1
+      - config2
+      - config3
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro

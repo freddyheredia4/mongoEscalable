@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+mongo --host mongo1 --port 27017 --eval "rs.initiate()"
+mongo --host mongo1 --port 27017 --eval "rs.add('mongo2:27017')"
+mongo --host mongo1 --port 27017 --eval "rs.add('mongo3:27017')"
+mongo --host mongo1 --port 27017 --eval "rs.status()"
+mongo --host mongo4 --port 27017 --eval "rs.initiate()"
+mongo --host mongo4 --port 27017 --eval "rs.add('mongo5:27017')"
+mongo --host mongo4 --port 27017 --eval "rs.add('mongo6:27017')"
+mongo --host mongo4 --port 27017 --eval "rs.status()"
+mongo --host config1 --port 27019 --eval "rs.initiate()"
+mongo --host config1 --port 27019 --eval "rs.add('config2:27019')"
+mongo --host config1 --port 27019 --eval "rs.add('config3:27019')"
+mongo --host config1 --port 27019 --eval "rs.status()"
